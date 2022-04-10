@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Router from './components/router'
+import Navbar from './components/navbar'
 const App = () => {
   return (
 
     <div>
-      <Link to='/' data-testid="main-link">main</Link>
-      <Link to='/about' data-testid="about-link">about</Link>
-      <Link to='/users' data-testid="users-link">users</Link>
-     
-      <Router/>
+      <Navbar />
+      <Router />
     </div>
 
   )

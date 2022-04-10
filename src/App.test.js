@@ -1,13 +1,11 @@
 import React from "react";
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import Users from "./pages/UsersPage";
-import UserDetailsPage from "./pages/UserDetailsPage";
 import axios from 'axios'
 import renderWithRouter from './components/test_helpers/render_with_router'
-import AppRouter from './components/router'
 
 jest.mock('axios')
 
@@ -71,7 +69,9 @@ describe('Users', () => {
   });
 
   test('test redirect to details page', async () => {
-    render(renderWithRouter(<Users />));
+    renderWithRouter(<Users />);
+    //второй способ
+    // renderWithRouter(null, '/users');
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(3);
     userEvent.click(users[0])
