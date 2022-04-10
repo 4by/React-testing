@@ -9,9 +9,9 @@ const Users = () => {
     const loadUsers = async () => setUsers(await axios.get('https://jsonplaceholder.typicode.com/users').data);
 
     return (
-        <div data-testid="users-page">
+        <>
             {users.map(user => <div key={user.id} data-testid="user-item"> {user.name} </div>)}
-        </div>
+        </>
     );
 };
 
