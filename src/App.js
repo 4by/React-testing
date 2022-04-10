@@ -9,9 +9,7 @@ const App = () => {
 
   //при первой загрузке страницы через 100ms в стейт data назначается значение 
   useEffect(() => {
-    setTimeout(() => {
-      setTimeState({})
-    }, 100)
+    setTimeout(() => setTimeState({}), 100)
   })
 
   return (
