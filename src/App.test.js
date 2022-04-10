@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import App from './App';
 import { MemoryRouter } from "react-router-dom";
 
+
 describe('TEST APP', () => {
   test('Router test', () => {
     //мы не можем заредерить Апп отдельно от роутера, поскольку Апп использует
@@ -17,14 +18,15 @@ describe('TEST APP', () => {
     expect(screen.getByTestId('about-page')).toBeInTheDocument();
   });
 
-  // test('Error page test', () => {
-  //     render(
-  //         <MemoryRouter initialEntries={['/asfasfafasf']}>
-  //             <App/>
-  //         </MemoryRouter>
-  //     );
-  //     expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
-  // });
+  test('Error page test', () => {
+      render(
+        //передаем пропс для роутера, и тогда выполяется переход по данным ссылкам поледовательно
+          <MemoryRouter initialEntries={['/about', '/sac']}>
+              <App/>
+          </MemoryRouter>
+      );
+      expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
+  });
 
 
 
