@@ -38,8 +38,8 @@ describe('TEST APP', () => {
   });
 
   test('click event', () => {
-    const btnId = 'toggle-btn'
-    const elemId = 'toggle-elem'
+    const btnId = 'btn-elem'
+    const elemId = 'btn-render-elem'
 
     render(<App />);
     const btn = screen.getByTestId(btnId)
@@ -50,7 +50,7 @@ describe('TEST APP', () => {
   });
 
   test('input event', () => {
-    const inputId = 'value-elem'
+    const inputId = 'input-render-elem'
     const arg = "123"
 
     render(<App />);

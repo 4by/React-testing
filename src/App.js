@@ -3,14 +3,14 @@ import './App.css';
 
 const App = () => {
 
-  const [data, setData] = useState(null)
-  const [toggle, setToggle] = useState(false)
-  const [value, setValue] = useState("")
+  const [timeState, setTimeState] = useState(null)
+  const [btnState, setBtnState] = useState(false)
+  const [inputState, setInputState] = useState("")
 
   //при первой загрузке страницы через 100ms в стейт data назначается значение 
   useEffect(() => {
     setTimeout(() => {
-      setData({})
+      setTimeState({})
     }, 100)
   })
 
@@ -18,18 +18,17 @@ const App = () => {
     <div>
 
       <h1>Hello world</h1>
-     
+
       {/* такой синтаксис означает что блок появится только при выполнении условия
       в данном случае наличия стейта data */}
-      {data && <div style={{ color: 'red' }}>data</div>}
-     
-      <input onChange = {e => setValue(e.target.value)}  placeholder="input value"></input>
-      <h1 data-testid="value-elem">{value}</h1>
+      {timeState && <div style={{ color: 'red' }}>data</div>}
 
-      <button data-testid="toggle-btn" onClick={() => setToggle(prev => !prev)}></button>
-      {toggle === true && <div data-testid="toggle-elem">toggle</div>}
-      
+      {/* по пропсу data-testid тесты ищут элементы матчером "(get/query/find)ByTestId" */}
+      <h1 data-testid="input-render-elem">{inputState}</h1>
+      <input onChange={e => setInputState(e.target.value)} placeholder="input value"></input>
 
+      {btnState === true && <div data-testid="btn-render-elem">toggle</div>}
+      <button data-testid="btn-elem" onClick={() => setBtnState(prev => !prev)}></button>
 
 
     </div>
