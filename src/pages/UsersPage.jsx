@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
-    const loadUsers = async () => setUsers(await axios.get('https://jsonplaceholder.typicode.com/users').data);
+    const loadUsers = async () => {
+        const resp = await axios.get('https://jsonplaceholder.typicode.com/users')
+        setUsers(resp.data);
+    }
     useEffect(() => { loadUsers() }, [])
-
     return (
 
         <div data-testid="users-page">
+            {console.log(users)}
             {users.map(user =>
                 <Link to={`/users/${user.id}`}
                     key={user.id}
