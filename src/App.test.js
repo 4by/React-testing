@@ -5,6 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 
 describe('TEST APP', () => {
+  
   test('Router test', () => {
     //мы не можем заредерить Апп отдельно от роутера, поскольку Апп использует
     //роутовские элементы (а сам роутер в индексе), поэтому
@@ -28,6 +29,9 @@ describe('TEST APP', () => {
       expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
   });
 
-
-
 })
+
+
+// describe('Users', () => {
+  
+// })
