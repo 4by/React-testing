@@ -18,8 +18,8 @@ const App = () => {
         <Route path="/*" element={<ErrorPage />} /> 
         <Route path="/" element={<MainPage />} />
         <Route path="/about" element={<AboutPage />} />
-        {/* <Route path="/users" element={<Users />} /> */}
-        {/* <Route path="/users/:id" element={<UserDetailsPage />} /> */}
+        <Route path="/users" element={<Users />} /> 
+        <Route path="/users/:id" element={<UserDetailsPage />} />
         {/* 
         <Route path="/hello" element={<HelloWorld />} />
         <Route path="/users-test" element={<UsersForTest />} />
