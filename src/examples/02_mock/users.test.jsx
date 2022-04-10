@@ -14,9 +14,9 @@ describe('TEST APP', () => {
     beforeEach(() => {
         response = {
             data: [
-                { "id": 1, "name": "Leanne Graham" },
-                { "id": 2, "name": "Ervin Howell" },
-                { "id": 3, "name": "Clementine Bauch" },
+                { "name": "first guy" },
+                { "name": "second guy" },
+                { "name": "third guy" },
             ]
         }
     })
@@ -32,7 +32,7 @@ describe('TEST APP', () => {
         const users = await screen.findAllByTestId('user-item');
         expect(users.length).toBe(3);
         expect(axios.get).toBeCalledTimes(1);
-        // screen.debug();
+        screen.debug();
 
     });
 
