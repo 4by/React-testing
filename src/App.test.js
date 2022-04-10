@@ -44,6 +44,7 @@ describe('TEST APP', () => {
     render(<App />);
     const btn = screen.getByTestId(btnId)
     expect(screen.queryByTestId(elemId)).toBeNull()
+    // fireEvent искуственно создает событие
     fireEvent.click(btn)
     expect(screen.queryByTestId(elemId)).toBeInTheDocument()
   });

@@ -7,8 +7,7 @@ const App = () => {
   const [toggle, setToggle] = useState(false)
   const [value, setValue] = useState("")
 
-  const onClick = () => setToggle(prev => !prev)
-
+  //при первой загрузке страницы через 100ms в стейт data назначается значение 
   useEffect(() => {
     setTimeout(() => {
       setData({})
@@ -17,15 +16,22 @@ const App = () => {
 
   return (
     <div>
-      {/* такой синтаксис означает что блоки появятся только при выполнении условия */}
-      {toggle === true && <div data-testid="toggle-elem">toggle</div>}
-      {data && <div style={{ color: 'red' }}>data</div>}
-
-      <h1 data-testid="value-elem">{value}</h1>
 
       <h1>Hello world</h1>
-      <button data-testid="toggle-btn" onClick={onClick}></button>
+     
+      {/* такой синтаксис означает что блок появится только при выполнении условия
+      в данном случае наличия стейта data */}
+      {data && <div style={{ color: 'red' }}>data</div>}
+     
       <input onChange = {e => setValue(e.target.value)}  placeholder="input value"></input>
+      <h1 data-testid="value-elem">{value}</h1>
+
+      <button data-testid="toggle-btn" onClick={() => setToggle(prev => !prev)}></button>
+      {toggle === true && <div data-testid="toggle-elem">toggle</div>}
+      
+
+
+
     </div>
   );
 }
