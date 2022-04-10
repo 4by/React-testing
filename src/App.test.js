@@ -1,8 +1,15 @@
+import React from "react";
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import { MemoryRouter } from "react-router-dom";
+import {MemoryRouter, Route, Routes} from "react-router-dom";
+import Users from "./pages/UsersPage";
+// import UserDetailsPage from "../../pages/UserDetailsPage";
+import axios from 'axios'
 
+
+
+jest.mock('axios')
 
 describe('TEST APP', () => {
 
@@ -32,43 +39,43 @@ describe('TEST APP', () => {
 })
 
 
-// describe('Users', () => {
+describe('Users', () => {
 
 
-//   let response;
+  let response;
 
-//   beforeEach(() => {
-//     response = {
-//       data: [
-//         { "name": "first guy" },
-//         { "name": "second guy" },
-//         { "name": "third guy" },
-//       ]
-//     }
-//   })
+  beforeEach(() => {
+    response = {
+      data: [
+        { "name": "first guy" },
+        { "name": "second guy" },
+        { "name": "third guy" },
+      ]
+    }
+  })
 
-//   afterEach(() => {
-//     jest.clearAllMocks();
-//   })
-
-
-//   test('renders learn react link', async () => {
-//     axios.get.mockReturnValue(response);
-//     render(<Users />);
-//     const users = await screen.findAllByTestId('user-item');
-//     expect(users.length).toBe(3);
-//     expect(axios.get).toBeCalledTimes(1);
-//     screen.debug();
-//   });
-
-//   test('test redirect to details page', async () => {
-//     axios.get.mockReturnValue(response);
-//     render(renderWithRouter(<Users />));
-//     const users = await screen.findAllByTestId('user-item');
-//     expect(users.length).toBe(3);
-//     userEvent.click(users[0])
-//     expect(screen.getByTestId('user-page')).toBeInTheDocument();
-//   });
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
 
 
-// })
+  test('renders learn react link', async () => {
+    axios.get.mockReturnValue(response);
+    render(<MemoryRouter> <Users /> </MemoryRouter>);
+    const users = await screen.findAllByTestId('user-item');
+    expect(users.length).toBe(3);
+    expect(axios.get).toBeCalledTimes(1);
+    screen.debug();
+  });
+
+  // test('test redirect to details page', async () => {
+  //   axios.get.mockReturnValue(response);
+  //   render(renderWithRouter(<Users />));
+  //   const users = await screen.findAllByTestId('user-item');
+  //   expect(users.length).toBe(3);
+  //   userEvent.click(users[0])
+  //   expect(screen.getByTestId('user-page')).toBeInTheDocument();
+  // });
+
+
+})
