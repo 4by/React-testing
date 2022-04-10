@@ -1,15 +1,14 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import MainPage from "./pages/MainPage";
-import AboutPage from "./pages/AboutPage";
-import UsersPage from "./pages/UsersPage";
-import UserDetailsPage from "./pages/UserDetailsPage";
-import ErrorPage from "./pages/ErrorPage";
+import MainPage from "../pages/MainPage";
+import AboutPage from "../pages/AboutPage";
+import UsersPage from "../pages/UsersPage";
+import UserDetailsPage from "../pages/UserDetailsPage";
+import ErrorPage from "../pages/ErrorPage";
 // import HelloWorld from "../pages/HelloWorld";
 // import UsersForTest from "../components/usersForTest/UsersForTest";
 
-const AppRouter = () => {
-    return (
+const AppRouter = () => (
         <Routes>
             <Route path="/*" element={<ErrorPage />} />
             <Route path="/" element={<MainPage />} />
@@ -22,6 +21,5 @@ const AppRouter = () => {
              */}
         </Routes>
     );
-};
 
 export default AppRouter;

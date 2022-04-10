@@ -1,6 +1,6 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import Router from './router'
+import { Link } from 'react-router-dom';
+import Router from './components/router'
 const App = () => {
   return (
 

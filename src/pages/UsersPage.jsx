@@ -12,7 +12,6 @@ const Users = () => {
     return (
 
         <div data-testid="users-page">
-            {console.log(users)}
             {users.map(user =>
                 <Link to={`/users/${user.id}`}
                     key={user.id}
