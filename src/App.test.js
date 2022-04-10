@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import {MemoryRouter, Route, Routes} from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import Users from "./pages/UsersPage";
-// import UserDetailsPage from "../../pages/UserDetailsPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
 import axios from 'axios'
 
 
@@ -52,6 +52,9 @@ describe('Users', () => {
         { "name": "third guy" },
       ]
     }
+
+    axios.get.mockReturnValue(response);
+
   })
 
   afterEach(() => {
@@ -60,7 +63,6 @@ describe('Users', () => {
 
 
   test('renders learn react link', async () => {
-    axios.get.mockReturnValue(response);
     render(<MemoryRouter> <Users /> </MemoryRouter>);
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(3);
@@ -68,14 +70,21 @@ describe('Users', () => {
     screen.debug();
   });
 
-  // test('test redirect to details page', async () => {
-  //   axios.get.mockReturnValue(response);
-  //   render(renderWithRouter(<Users />));
-  //   const users = await screen.findAllByTestId('user-item');
-  //   expect(users.length).toBe(3);
-  //   userEvent.click(users[0])
-  //   expect(screen.getByTestId('user-page')).toBeInTheDocument();
-  // });
+  test('test redirect to details page', async () => {
+    // render(renderWithRouter(<Users />));
+    render(
+      <MemoryRouter initialEntries={['/users']}>
+        <Routes>
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<UserDetailsPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    const users = await screen.findAllByTestId('user-item');
+    expect(users.length).toBe(3);
+    userEvent.click(users[0])
+    expect(screen.getByTestId('user-page')).toBeInTheDocument();
+  });
 
 
 })
