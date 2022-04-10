@@ -1,11 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 
 describe('TEST APP', () => {
 
   test('sync render test', () => {
     render(<App />);
-
     // getBy возвращает один элемент/ошибку при отсутствии
     // getAll возвращает массив элементов
     // query(By, All) - возвращает элементы/null при отсутствии
@@ -18,20 +17,49 @@ describe('TEST APP', () => {
     expect(btn).toBeInTheDocument();
     expect(input).toBeInTheDocument();
 
-    //показывает в консоли что рендерится
-    // screen.debug()
-
     // expect(input).toMatchSnapshot();
 
   });
 
   test('async render test', async () => {
     render(<App />);
+    //показывает в консоли что рендерится
+    //в консоли видим, что элементы, загружающиеся асинхронно появляются не сразу
+    screen.debug()
 
     // find(By, All) - возвращает элементы/ничего при отсутствии | обьект завернут в промис
     const helloWorldElem = await screen.findByText(/data/i);
     expect(helloWorldElem).toBeInTheDocument();
     expect(helloWorldElem).toHaveStyle({ color: 'red' });
+
+    //теперь асинхроннные элементы появились
+    screen.debug()
+
+  });
+
+  test('click event', () => {
+    const btnId = 'toggle-btn'
+    const elemId = 'toggle-elem'
+
+    render(<App />);
+    const btn = screen.getByTestId(btnId)
+    expect(screen.queryByTestId(elemId)).toBeNull()
+    fireEvent.click(btn)
+    expect(screen.queryByTestId(elemId)).toBeInTheDocument()
+  });
+
+  test('input event', () => {
+    const inputId = 'value-elem'
+    const arg = "123"
+
+    render(<App />);
+    const input = screen.getByPlaceholderText(/input value/i);
+    //toContainHTML не совсем то, что нужно. Оно показывает не содержимое инпута а весь обьект хтмл
+    expect(screen.queryByTestId(inputId)).toContainHTML("")
+    fireEvent.input(input, {
+      target: { value: arg }
+    })
+    expect(screen.queryByTestId(inputId)).toContainHTML(arg)
 
   });
 
