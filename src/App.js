@@ -1,33 +1,30 @@
-import { useEffect, useState } from 'react';
-
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import MainPage from "./pages/MainPage";
+import AboutPage from "./pages/AboutPage";
+// import Users from "../components/users/Users";
+// import UserDetailsPage from "../pages/UserDetailsPage";
+// import ErrorPage from "../pages/ErrorPage";
+// import HelloWorld from "../pages/HelloWorld";
+// import UsersForTest from "../components/usersForTest/UsersForTest";
 const App = () => {
-
-  const [timeState, setTimeState] = useState(null)
-  const [btnState, setBtnState] = useState(false)
-  const [inputState, setInputState] = useState("")
-
-  //при первой загрузке страницы через 100ms в стейт data назначается значение 
-  useEffect(() => { setTimeout(() => setTimeState({}), 100) })
-
   return (
+
     <div>
-
-      <h1>Hello world</h1>
-
-      {/* такой синтаксис означает что блок появится только при выполнении условия
-      в данном случае наличия стейта data */}
-      {timeState && <div style={{ color: 'red' }}>data</div>}
-
-      {/* по пропсу data-testid тесты ищут элементы матчером "(get/query/find)ByTestId" */}
-      <h1 data-testid="input-render-elem">{inputState}</h1>
-      <input onChange={e => setInputState(e.target.value)} placeholder="input value"></input>
-
-      {btnState === true && <div data-testid="btn-render-elem">toggle</div>}
-      <button data-testid="btn-elem" onClick={() => setBtnState(prev => !prev)}></button>
-
-
+      <Link to='/' data-testid="main-link"></Link>
+      <Link to='/about' data-testid="about-link"></Link>
+      <Routes>
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/" element={<MainPage />} />
+        {/* <Route path="/hello" element={<HelloWorld />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/users-test" element={<UsersForTest />} />
+        <Route path="/users/:id" element={<UserDetailsPage />} />
+        <Route path="/*" element={<ErrorPage />} /> */}
+      </Routes>
     </div>
-  );
+
+  )
 }
 
 export default App;
