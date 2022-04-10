@@ -1,7 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
 
 describe('TEST APP', () => {
+
+  // beforeEach(() => render(<App />))
+  // afterEach(() => { cleanup() });
 
   test('sync render test', () => {
     render(<App />);
@@ -57,9 +61,10 @@ describe('TEST APP', () => {
     const input = screen.getByPlaceholderText(/input value/i);
     //toContainHTML не совсем то, что нужно. Оно показывает не содержимое инпута а весь обьект хтмл
     expect(screen.queryByTestId(inputId)).toContainHTML("")
-    fireEvent.input(input, {
-      target: { value: arg }
-    })
+    fireEvent.input(input, { target: { value: arg } })
+    //userEvent в отличие от fireEvent не просто модулирует js-события, а
+    //вообще события, близкие к пользователю
+    userEvent.type(input, arg)
     expect(screen.queryByTestId(inputId)).toContainHTML(arg)
 
   });
