@@ -1,16 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Router from './components/router'
 import Navbar from './components/navbar'
-const App = () => {
-  return (
+const App = () => (
 
-    <div>
-      <Navbar />
-      <Router />
-    </div>
+  <div>
+    {/* отображенные на экране ссылки с указанным маршрутом */}
+    <Navbar />
+    {/* назначение маршрута для каждой ссылки  */}
+    <Router />
+  </div>
 
-  )
-}
+)
+
 
 export default App;

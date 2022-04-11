@@ -1,58 +1,65 @@
 import React from "react";
+import axios from 'axios'
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App from './App';
 import { MemoryRouter } from "react-router-dom";
 import Users from "./pages/UsersPage";
-import axios from 'axios'
 import renderWithRouter from './components/test_helpers/render_with_router'
+import Navbar from './components/navbar'
 
 jest.mock('axios')
 
-describe('TEST APP', () => {
+const response = {
+  data: [
+    { "name": "first guy" },
+    { "name": "second guy" },
+    { "name": "third guy" },
+  ]
+}
 
-  test('Router test', () => {
-    //мы не можем заредерить Апп отдельно от роутера, поскольку Апп использует
-    //роутовские элементы (а сам роутер в индексе), поэтому
-    //используем специальный роутер для тестирования
-    render(<MemoryRouter> <App /> </MemoryRouter>);
+describe('testing app', () => {
+
+  test('redirect to main', async () => {
+    renderWithRouter(<Navbar />);
     const mainLink = screen.getByTestId('main-link')
-    const aboutLink = screen.getByTestId('about-link')
     userEvent.click(mainLink)
     expect(screen.getByTestId('main-page')).toBeInTheDocument();
+  });
+
+  test('redirect to about', async () => {
+    renderWithRouter(<Navbar />);
+    const aboutLink = screen.getByTestId('about-link')
     userEvent.click(aboutLink)
     expect(screen.getByTestId('about-page')).toBeInTheDocument();
   });
 
+  test('redirect to users', async () => {
+    // memoryRouter переходит только по "локальным" ссылкам, поэтому мокаем
+    axios.get.mockReturnValue(response);
+    renderWithRouter(<Navbar />);
+    const userLink = screen.getByTestId('users-link')
+    userEvent.click(userLink)
+    expect(screen.getByTestId('users-page')).toBeInTheDocument();
+    //очищаем моки
+    jest.clearAllMocks();
+  });
+
   test('Error page test', () => {
-    render(
-      //передаем пропс для роутера, и тогда выполяется переход по данным ссылкам поледовательно
-      <MemoryRouter initialEntries={['/about', '/sac']}>
-        <App />
-      </MemoryRouter>
-    );
+    // мы хотим зарендерить страницу ошибки, но на нее нет ссылки на экране
+    //воспользуемся кастомной функцией
+    //второй способ
+    //renderWithRouter(null, '/users');
+    renderWithRouter(null, '/sac')
     expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
   });
 
 })
 
 
-describe('Users', () => {
-
-
-  let response;
+describe('testing users', () => {
 
   beforeEach(() => {
-    response = {
-      data: [
-        { "name": "first guy" },
-        { "name": "second guy" },
-        { "name": "third guy" },
-      ]
-    }
-
     axios.get.mockReturnValue(response);
-
   })
 
   afterEach(() => {
@@ -60,7 +67,7 @@ describe('Users', () => {
   })
 
 
-  test('renders learn react link', async () => {
+  test('renders from backend', async () => {
     render(<MemoryRouter> <Users /> </MemoryRouter>);
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(3);
@@ -68,15 +75,13 @@ describe('Users', () => {
     screen.debug();
   });
 
-  test('test redirect to details page', async () => {
+  test('redirect to detail-user page', async () => {
     renderWithRouter(<Users />);
-    //второй способ
-    // renderWithRouter(null, '/users');
     const users = await screen.findAllByTestId('user-item');
-    expect(users.length).toBe(3);
     userEvent.click(users[0])
     expect(screen.getByTestId('user-page')).toBeInTheDocument();
   });
+
 
 
 })
