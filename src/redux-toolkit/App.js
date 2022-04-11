@@ -1,10 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment } from "./CounterReducer";
+import getCounterValue from './stateSelector'
 
 const App = () => {
-
-  const getCounterValue = state => state?.counter?.value || 0
   
   const onIncrement = () => dispatch(increment())
   const onDecrement = () => dispatch(decrement())
