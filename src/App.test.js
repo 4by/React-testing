@@ -82,6 +82,5 @@ describe('testing users', () => {
     expect(screen.getByTestId('user-page')).toBeInTheDocument();
   });
 
-
-
+ 
 })
