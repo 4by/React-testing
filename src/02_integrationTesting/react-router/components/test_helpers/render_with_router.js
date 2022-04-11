@@ -2,7 +2,7 @@ import { MemoryRouter } from "react-router-dom";
 import AppRouter from "../router";
 import { render } from '@testing-library/react';
 
-const renderWithRouter = (component, initialRoute = '/') => (
+const renderWithRouter = (component, initialRoute = '/') =>
     render(
         //мемори роутер последовательно проходит по всем путям из initialEntries 
         //или по компонентам, которые под роутером
@@ -12,5 +12,5 @@ const renderWithRouter = (component, initialRoute = '/') => (
             {component}
         </MemoryRouter>
     )
-)
+
 export default renderWithRouter

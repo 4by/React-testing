@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Users from './users';
+import Users from './';
 import axios from 'axios'
 import React from "react";
 
