@@ -5,7 +5,7 @@ const rootReducer = combineReducers({
     counter: counterReducer,
 })
 
-const createReduxStore = (initialState = {}) =>
+const createReduxStore = (initialState = {}) => 
     configureStore({
         reducer: rootReducer,
         preloadedState: initialState,
