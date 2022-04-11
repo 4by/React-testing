@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "./CounterReducer";
-import getCounterValue from './stateSelector'
+import { decrement, increment } from "./state/reducers/CounterReducer";
+import getCounterValue from './state/state selector/stateSelector'
 
 const App = () => {
   

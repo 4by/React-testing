@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
-import createReduxStore from "./store";
+import createReduxStore from "../../state/reducers";
 import { Provider } from "react-redux";
 
-export const renderWithRedux = (component, initialState) =>
+export default (component, initialState) =>
     render(
         <Provider store={createReduxStore(initialState)}>
             {component}
