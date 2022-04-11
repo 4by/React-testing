@@ -5,11 +5,10 @@ const rootReducer = combineReducers({
     counter: counterReducer,
 })
 
-const createReduxStore = (initialState = {}) => 
+export default (initialState = {}) =>
     configureStore({
         reducer: rootReducer,
         preloadedState: initialState,
     })
 
 
-export default createReduxStore
