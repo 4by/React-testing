@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
 
-// import ReactRouterImport from './react-router';
-import ReduxToolkitImport from './redux-toolkit';
+import App from './react-router';
+// import App from './redux-toolkit';
 
 
 ReactDOM.createRoot(document.getElementById("root"))
   .render(
     <React.StrictMode>
-      <ReduxToolkitImport />
+      <App />
     </React.StrictMode>
   );
 
