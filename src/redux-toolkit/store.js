@@ -1,4 +1,4 @@
-import counterReducer from "./reducers/CounterReducer";
+import counterReducer from "./CounterReducer";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({

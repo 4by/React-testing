@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
-import ReactRouterImport from './react-router';
+
+// import ReactRouterImport from './react-router';
 import ReduxToolkitImport from './redux-toolkit';
 
 
