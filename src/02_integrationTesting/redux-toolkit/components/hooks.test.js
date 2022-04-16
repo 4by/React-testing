@@ -1,7 +1,7 @@
 import { screen, render } from "@testing-library/react";
-import App from "./App";
+import App from "./connect";
 import userEvent from "@testing-library/user-event";
-import renderWithRedux from "./components/test_helpers/render_with_redux";
+import renderWithRedux from "./test_helpers/render_with_redux";
 
 describe('Counter test', () => {
 
