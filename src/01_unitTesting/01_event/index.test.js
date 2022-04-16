@@ -36,6 +36,8 @@ describe('TEST APP', () => {
     // fireEvent искуственно создает событие
     fireEvent.click(btn)
     expect(screen.queryByTestId(elemId)).toBeInTheDocument()
+    //пропсы типа онклик не рендерятся
+    // screen.debug()
   });
 
   test('input event', () => {
